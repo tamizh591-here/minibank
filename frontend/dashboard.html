@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>MiniBank Dashboard</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="dashboard">
+
+    <div class="navbar">
+
+        <h2>MiniBank</h2>
+
+        <button onclick="logout()">
+            Logout
+        </button>
+
+    </div>
+
+    <div class="welcome">
+
+        <h1>
+            Welcome,
+            <span id="customerName">Customer</span>
+        </h1>
+
+        <p>Your MiniBank dashboard</p>
+
+    </div>
+
+    <div class="account-grid">
+
+        <div class="account-card">
+
+            <p>Account Number</p>
+
+            <h2 id="accountNumber">Loading...</h2>
+
+        </div>
+
+        <div class="account-card">
+
+            <p>Available Balance</p>
+
+            <h2 id="accountBalance">Loading...</h2>
+
+        </div>
+
+    </div>
+
+    <div class="actions">
+
+        <button disabled>Deposit</button>
+        <button disabled>Withdraw</button>
+        <button disabled>Transfer</button>
+
+    </div>
+
+    <div class="transactions">
+
+        <h2>Recent Transactions</h2>
+
+        <p>
+            No transactions available.
+        </p>
+
+    </div>
+
+</div>
+
+<script src="app.js"></script>
+
+</body>
+
+</html>

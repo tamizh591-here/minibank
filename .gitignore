@@ -1,0 +1,43 @@
+# Maven
+**/target/
+*.war
+*.jar
+
+# Logs
+*.log
+logs/
+**/logs/
+
+# Tomcat runtime
+**/work/
+**/temp/
+**/webapps/
+
+# ActiveMQ runtime
+activemq-data/
+data/
+**/activemq-data/
+
+# IDE
+.idea/
+.vscode/
+*.iml
+.classpath
+.project
+.settings/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Environment / secrets
+.env
+.env.*
+*.env
+application-local.properties
+application-prod.properties
+
+# Temporary files
+*.tmp
+*.swp
+*~
