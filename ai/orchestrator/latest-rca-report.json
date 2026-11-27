@@ -1,0 +1,58 @@
+{
+  "report_version": "1.3",
+  "title": "MiniBank AI Incident Analysis",
+  "incident": {
+    "problem_id": "TEST-001",
+    "problem_name": "Process unavailable",
+    "status": "ACTIVE",
+    "category": "AVAILABILITY",
+    "description": "Customer process is unavailable",
+    "start_time": null,
+    "end_time": null,
+    "affected_entities": [
+      "customer"
+    ]
+  },
+  "qwen_analysis": {
+    "role": "investigator",
+    "model": "qwen2.5:3b",
+    "root_cause": "host resource exhaustion",
+    "evidence": [
+      "infrastructure_evidence.metrics[0].host",
+      "infrastructure_evidence.metrics[0].cpu_usage",
+      "infrastructure_evidence.metrics[0].memory_usage"
+    ],
+    "recommended_action": "RESTART_CUSTOMER_SERVICE",
+    "reason": "The CPU usage and memory usage of the customer service host (Tamil.localdomain) are at 24.5% and 51.2%, respectively, which may indicate host resource exhaustion leading to the customer process being unavailable. Since the services' known failure scenarios match the symptom and the evidence supports the root cause, we recommend restarting the customer service.",
+    "confidence": 0.8
+  },
+  "evaluator_validation": {
+    "provider": "local_ollama",
+    "model": "qwen2.5:3b",
+    "rca": {
+      "choice": "insufficient_evidence",
+      "probabilities": {
+        "supported": 0.0,
+        "contradicted": 1.0,
+        "insufficient_evidence": 0.0
+      },
+      "confidence": 0.95
+    },
+    "action": {
+      "choice": "needs_review",
+      "probabilities": {
+        "supported": 0.0,
+        "not_supported": 1.0,
+        "needs_review": 0.0
+      },
+      "confidence": 0.95
+    }
+  },
+  "final_decision": {
+    "decision": "ESCALATE",
+    "approved_action": null,
+    "reason": "RCA was not validated by Jev. Evaluation: insufficient_evidence",
+    "validation": {}
+  },
+  "architecture_note": "Qwen2.5:3B is used for the investigator and evaluator in separate inference passes. The evaluator receives condensed evidence. The deterministic Python guardrail remains the final execution authority."
+}

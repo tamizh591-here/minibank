@@ -1,0 +1,85 @@
+{
+  "knowledge_version": "1.0",
+  "application": "MiniBank",
+
+  "services": {
+    "customer": {
+      "type": "Spring Boot WAR on external Tomcat",
+      "port": 8081,
+      "context_path": "/customer-service",
+      "health_endpoint": "/customer-service/actuator/health",
+      "dependencies": [
+        "postgresql"
+      ],
+      "known_failure_scenarios": [
+        {
+          "symptom": "Customer process unavailable",
+          "possible_causes": [
+            "Tomcat process stopped",
+            "JVM process failure",
+            "host resource exhaustion"
+          ]
+        }
+      ],
+      "allowed_actions": [
+        "NO_ACTION",
+        "RESTART_CUSTOMER_SERVICE",
+        "ESCALATE"
+      ]
+    },
+
+    "account": {
+      "type": "Spring Boot WAR on external Tomcat",
+      "port": 8082,
+      "context_path": "/account-service",
+      "dependencies": [
+        "postgresql"
+      ],
+      "allowed_actions": [
+        "NO_ACTION",
+        "RESTART_ACCOUNT_SERVICE",
+        "ESCALATE"
+      ]
+    },
+
+    "transaction": {
+      "type": "Spring Boot WAR on external Tomcat",
+      "port": 8083,
+      "context_path": "/transaction-service",
+      "dependencies": [
+        "account",
+        "activemq",
+        "postgresql"
+      ],
+      "allowed_actions": [
+        "NO_ACTION",
+        "RESTART_TRANSACTION_SERVICE",
+        "ESCALATE"
+      ]
+    },
+
+    "notification": {
+      "type": "Spring Boot WAR on external Tomcat",
+      "port": 8084,
+      "context_path": "/notification-service",
+      "dependencies": [
+        "activemq",
+        "postgresql"
+      ],
+      "allowed_actions": [
+        "NO_ACTION",
+        "RESTART_NOTIFICATION_SERVICE",
+        "ESCALATE"
+      ]
+    }
+  },
+
+  "remediation_policy": {
+    "principles": [
+      "Do not restart a healthy service only because it reports downstream errors.",
+      "Check dependency health before recommending a restart.",
+      "Prefer remediation of the failed dependency when evidence identifies a dependency failure.",
+      "Escalate when evidence is insufficient or conflicting."
+    ]
+  }
+}
