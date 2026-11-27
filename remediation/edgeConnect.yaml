@@ -1,0 +1,7 @@
+name: minibank-edgeconnect
+api_endpoint_host: wmh09812.apps.dynatrace.com
+oauth:
+  client_id: dt0s10.2UKFKN2G
+  client_secret: dt0s10.2UKFKN2G.V32Q3MTVEKVEDGLRUAJD2FYSQKUZDPO6RWFA6ENANSQYXY32XATAFG3Q2FTFDZFV
+  resource: urn:dtenvironment:wmh09812
+  endpoint: https://sso.dynatrace.com/sso/oauth2/token
